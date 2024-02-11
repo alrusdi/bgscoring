@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "bgscoring"
+version = "0.1.0"
+description = ""
+authors = ["Kai Letov <kai.letov@gmil.com>"]
+license = "GNU"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+asyncpg = "^0.29.0"
+psycopg2-binary = "^2.9.9"
+sqlalchemy = { extras = ["asyncio"], version = "^2.0.25" }
+alembic = "^1.13.1"
+pyjwt = {extras = ["crypto"], version = "^2.8.0"}
+bcrypt = "^4.1.2"
+python-multipart = "^0.0.7"
+fastapi = {extras = ["all"], version = "^0.109.2"}
+uvicorn = "^0.27.1"
+greenlet = "^3.0.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+httpx = "^0.26.0"
+black = "^23.12.1"
+mypy = "^1.8.0"
+pylint = "^3.0.3"
+poethepoet = { extras = ["poetry-plugin"], version = "^0.24.4" }
+coverage = { extras = ["toml"], version = "^7.4.0" }
+pylint-pydantic = "^0.3.2"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
