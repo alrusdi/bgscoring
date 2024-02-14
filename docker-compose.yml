@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  fastapi_app:
+    container_name: bgscoring
+    build:
+      context: .
+    env_file:
+      - .env-non-dev
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fastapi_redis
+      - fastapi_db
+    command: sh /bgscoregames/docker/app.sh
+
+  fastapi_db:
+    container_name: fastapi_db
+    image: postgres:16.1-alpine3.19
+    env_file:
+      - .env-non-dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  fastapi_redis:
+    container_name: fastapi_redis
+    image: redis:7.0.15-alpine3.19
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata: {}
