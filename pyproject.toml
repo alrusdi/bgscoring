@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "bgscoregames"
+name = "bgscoring"
 version = "0.1.0"
 description = ""
 authors = ["Kai Letov <kai.letov@gmil.com>"]
@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.11"
 asyncpg = "^0.29.0"
 psycopg2-binary = "^2.9.9"
-sqlalchemy = { extras = ["asyncio"], version = "^2.0.25" }
+sqlalchemy = {extras = ["mypy"], version = "^2.0.27"}
 alembic = "^1.13.1"
 pyjwt = {extras = ["crypto"], version = "^2.8.0"}
 bcrypt = "^4.1.2"
@@ -32,13 +32,12 @@ poethepoet = { extras = ["poetry-plugin"], version = "^0.24.4" }
 coverage = { extras = ["toml"], version = "^7.4.0" }
 pylint-pydantic = "^0.3.2"
 pytest-asyncio = "^0.23.5"
+types-redis = "^4.6.0.20240106"
+ruff = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-pythonpath = [
-    ".", "src"
-]
 asyncio_mode="auto"

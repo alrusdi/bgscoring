@@ -7,11 +7,11 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.pool import NullPool
 
-from src.database import get_async_session
-from src.database import metadata
+from bgscoring.database import get_async_session
+from bgscoring.database import metadata
 from configs.app_config import (DB_HOST_TEST, DB_NAME_TEST, DB_PASS_TEST, DB_PORT_TEST,
                                 DB_USER_TEST)
-from src.main import app
+from bgscoring.main import app
 
 # DATABASE
 DATABASE_URL_TEST = f"postgresql+asyncpg://{DB_USER_TEST}:{DB_PASS_TEST}@{DB_HOST_TEST}:{DB_PORT_TEST}/{DB_NAME_TEST}"

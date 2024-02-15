@@ -1,6 +1,6 @@
 from sqlalchemy import insert, select
 
-from src.auth.models import role
+from bgscoring.auth.models import role
 from tests.conftest import client, async_session_maker
 
 

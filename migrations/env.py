@@ -11,9 +11,9 @@ import sys
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
 from configs.app_config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
-from src.auth.models import *
-from src.games.models import *
-from src.database import metadata
+from bgscoring.auth.models import *
+from bgscoring.games.models import *
+from bgscoring.database import metadata
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
