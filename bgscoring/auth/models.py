@@ -1,14 +1,15 @@
 from datetime import datetime
+
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import (
+    JSON,
+    TIMESTAMP,
+    Boolean,
+    Column,
+    ForeignKey,
     Integer,
     String,
-    TIMESTAMP,
-    ForeignKey,
     Table,
-    Column,
-    JSON,
-    Boolean,
 )
 
 from bgscoring.database import Base, metadata

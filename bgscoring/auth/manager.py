@@ -1,10 +1,11 @@
+import logging
+
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
-from bgscoring.configs.app_config import SECRET_AUTH
 from bgscoring.auth.models import User
 from bgscoring.auth.utils import get_user_db
-import logging
+from bgscoring.configs.app_config import SECRET_AUTH
 
 log = logging.getLogger(__name__)
 

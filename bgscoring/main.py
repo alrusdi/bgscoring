@@ -1,18 +1,17 @@
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_users import FastAPIUsers
-
 from redis import asyncio as aioredis
 from starlette.middleware.cors import CORSMiddleware
 
-from bgscoring.configs.app_config import REDIS_HOST, REDIS_PORT
 from bgscoring.auth.base_config import auth_backend
-from bgscoring.auth.models import User
 from bgscoring.auth.manager import get_user_manager
-from bgscoring.auth.schemas import UserRead, UserCreate
-
+from bgscoring.auth.models import User
+from bgscoring.auth.schemas import UserCreate, UserRead
+from bgscoring.configs.app_config import REDIS_HOST, REDIS_PORT
 from bgscoring.games.router import router as router_games
 
 app = FastAPI(
@@ -55,6 +54,6 @@ app.add_middleware(
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(*_):
     redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_response=True)
     FastAPICache.init(RedisBackend(redis), prefix='fastapi_cache')

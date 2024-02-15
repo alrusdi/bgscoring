@@ -1,3 +1,6 @@
+[project]
+requires-python = ">=3.11"
+
 [tool.poetry]
 name = "bgscoring"
 version = "0.1.0"
@@ -41,3 +44,21 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 asyncio_mode="auto"
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+
+select = ['E', 'F', 'W', 'A', 'PLC', 'PLE', 'PLW', 'I']
+ignore = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"

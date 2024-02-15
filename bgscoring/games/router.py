@@ -2,7 +2,7 @@ import time
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi_cache.decorator import cache
-from sqlalchemy import select, insert
+from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from bgscoring.database import get_async_session
@@ -16,9 +16,9 @@ router = APIRouter(
 
 
 @router.get("/")
-async def get_specific_games(id: int, session: AsyncSession = Depends(get_async_session)):
+async def get_specific_games(game_id: int, session: AsyncSession = Depends(get_async_session)):
     try:
-        query = select(games).where(games.c.id == id)
+        query = select(games).where(games.c.id == game_id)
         result = await session.execute(query)
         games_list = [dict(game) for game in result.all()]
         return games_list
