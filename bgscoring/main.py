@@ -14,8 +14,16 @@ from bgscoring.auth.schemas import UserCreate, UserRead
 from bgscoring.configs.app_config import REDIS_HOST, REDIS_PORT
 from bgscoring.games.router import router as router_games
 
+
+@asynccontextmanager
+async def lifespan(*_):
+    redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_response=True)
+    FastAPICache.init(RedisBackend(redis), prefix='bgscoring_cache')
+
+
 app = FastAPI(
-    title='Board Games Scoring'
+    title="Board Games Scoring",
+    lifespan=lifespan,
 )
 
 fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])  # type: ignore
@@ -51,9 +59,3 @@ app.add_middleware(
     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
                    "Authorization"],
 )
-
-
-@asynccontextmanager
-async def lifespan(*_):
-    redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_response=True)
-    FastAPICache.init(RedisBackend(redis), prefix='fastapi_cache')
