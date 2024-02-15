@@ -10,6 +10,7 @@ DB_PORT = os.environ.get("DB_PORT", "5432")
 DB_USER = os.environ.get("DB_USER", "bgscoring")
 DB_PASS = os.environ.get("DB_PASS", "bgscoring")
 
+DB_ENGINE_TEST = os.environ.get("DB_NAME_TEST", "postgresql+asyncpg")
 DB_NAME_TEST = os.environ.get("DB_NAME_TEST", "bgscoring_test")
 DB_HOST_TEST = os.environ.get("DB_HOST_TEST", "db")
 DB_PORT_TEST = os.environ.get("DB_PORT_TEST", "5432")

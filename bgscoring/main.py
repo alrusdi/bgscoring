@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -34,6 +35,10 @@ app.include_router(
 
 app.include_router(router_games)
 
+@app.get("/ping")
+async def ping():
+    return {"ping": "pong"}
+
 origins = [
     "http://localhost",
     "http://localhost:8080",
@@ -49,7 +54,7 @@ app.add_middleware(
 )
 
 
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_response=True)
     FastAPICache.init(RedisBackend(redis), prefix='fastapi_cache')
