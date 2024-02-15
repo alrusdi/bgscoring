@@ -4,10 +4,10 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
-from bgscoring.configs.app_config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME
+from bgscoring.configs.app_config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_ENGINE
 
 DATABASE_URL = (
-    f"postgresql+asyncpg://"
+    f"{DB_ENGINE}://"
     f"{DB_USER}:"
     f"{DB_PASS}@"
     f"{DB_HOST}:"

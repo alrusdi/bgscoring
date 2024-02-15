@@ -8,9 +8,9 @@ from alembic import context
 import os
 import sys
 
-sys.path.append(os.path.join(sys.path[0], 'src'))
+sys.path.append(os.path.join(sys.path[0], 'bgscoring'))
 
-from configs.app_config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
+from bgscoring.configs.app_config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
 from bgscoring.auth.models import *
 from bgscoring.games.models import *
 from bgscoring.database import metadata
