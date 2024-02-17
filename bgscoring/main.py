@@ -19,6 +19,7 @@ from bgscoring.games.router import router as router_games
 async def lifespan(*_):
     redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_response=True)
     FastAPICache.init(RedisBackend(redis), prefix='bgscoring_cache')
+    yield
 
 
 app = FastAPI(
