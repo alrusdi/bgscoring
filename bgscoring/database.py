@@ -1,6 +1,6 @@
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Annotated
 
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, String
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
@@ -16,8 +16,13 @@ DATABASE_URL = (
 )
 
 
+str_256 = Annotated[str, 256]
+
+
 class Base(DeclarativeBase):
-    pass
+    type_annotation_map = {
+        str_256: String(256)
+    }
 
 
 metadata = MetaData()
