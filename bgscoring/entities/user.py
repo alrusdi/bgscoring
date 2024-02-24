@@ -1,8 +1,8 @@
-from datetime import datetime, timezone
 import uuid
+from datetime import datetime, timezone
 from typing import Optional
 
-from pydantic import ConfigDict, EmailStr, Field, HttpUrl, BaseModel
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, HttpUrl
 
 
 class User(BaseModel):
