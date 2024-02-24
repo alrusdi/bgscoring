@@ -3,16 +3,17 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
-from fastapi_users import FastAPIUsers
 from redis import asyncio as aioredis
 from starlette.middleware.cors import CORSMiddleware
 
-from bgscoring.auth.base_config import auth_backend
-from bgscoring.auth.manager import get_user_manager
-from bgscoring.auth.models import User
-from bgscoring.auth.schemas import UserCreate, UserRead
 from bgscoring.configs.app_config import REDIS_HOST, REDIS_PORT
-from bgscoring.games.router import router as router_games
+from bgscoring.entities.routers.router_cell import cell_router
+from bgscoring.entities.routers.router_game import game_router
+from bgscoring.entities.routers.router_game_players import game_player_router
+from bgscoring.entities.routers.router_game_result import game_result_router
+from bgscoring.entities.routers.router_key import key_router
+from bgscoring.entities.routers.router_keyboard import keyboard_router
+from bgscoring.entities.routers.router_user import user_router
 
 
 @asynccontextmanager
@@ -27,21 +28,14 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])  # type: ignore
+app.include_router(user_router)
+app.include_router(key_router)
+app.include_router(keyboard_router)
+app.include_router(cell_router)
+app.include_router(game_router)
+app.include_router(game_player_router)
+app.include_router(game_result_router)
 
-app.include_router(
-    fastapi_users.get_auth_router(auth_backend),
-    prefix="/auth/jwt",
-    tags=["auth"],
-)
-
-app.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
-    prefix="/auth",
-    tags=["auth"],
-)
-
-app.include_router(router_games)
 
 @app.get("/ping")
 async def ping():
@@ -60,3 +54,8 @@ app.add_middleware(
     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
                    "Authorization"],
 )
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)

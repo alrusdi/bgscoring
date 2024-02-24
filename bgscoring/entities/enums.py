@@ -2,8 +2,8 @@ from enum import Enum
 
 
 class KeyAction(str, Enum):
-    VALUE = 'value'
     MATH_OP = 'math_op'
+    VALUE = 'value'
 
 
 class MathOp(str, Enum):
