@@ -1,4 +1,4 @@
-from typing import AsyncGenerator, Annotated
+from typing import Annotated, AsyncGenerator
 
 from sqlalchemy import MetaData, String
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine

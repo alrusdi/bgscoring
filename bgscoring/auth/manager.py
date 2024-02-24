@@ -10,7 +10,7 @@ from bgscoring.configs.app_config import SECRET_AUTH
 log = logging.getLogger(__name__)
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[User, int]):  # type: ignore
+class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     reset_password_token_secret = SECRET_AUTH
     verification_token_secret = SECRET_AUTH
 
@@ -54,7 +54,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):  # type: ignore
 
         await self.on_after_register(created_user, request)
 
-        return created_user  # type: ignore
+        return created_user
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

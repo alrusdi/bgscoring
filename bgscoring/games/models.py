@@ -3,8 +3,8 @@ import uuid
 from enum import Enum
 from typing import Annotated
 
-from sqlalchemy import UUID, DECIMAL, text, ForeignKey
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy import DECIMAL, UUID, ForeignKey, text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from bgscoring.database import Base, str_256
 
